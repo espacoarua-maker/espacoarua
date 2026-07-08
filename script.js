@@ -1,0 +1,1 @@
+// Espaço Aruã — scripts futuros
