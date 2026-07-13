@@ -3,104 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Espaço Aruã | Escuta em Movimento</title>
-  <meta name="description" content="Espaço Aruã — atendimento psicológico presencial e online em São Leopoldo/RS.">
+
+  <meta
+    name="description"
+    content="Espaço Aruã — atendimento psicológico presencial e online em São Leopoldo/RS.">
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="site-header">
-<a href="#hero" class="logo-link">
-  <img src="assets/logo.svg" alt="Logotipo do Espaço Aruã">
-  <span>Espaço Aruã</span>
-</a>
+  <header class="site-header">
+    <a href="#hero" class="logo-link">
+      <img src="assets/logo.svg" alt="Logotipo do Espaço Aruã">
+      <span>Espaço Aruã</span>
+    </a>
 
-  <nav class="site-nav">
-    <a href="#psicoterapia">Psicoterapia</a>
-    <a href="#como-trabalhamos">Como trabalhamos</a>
-    <a href="#equipe">Equipe</a>
-    <a href="#contato">Contato</a>
-  </nav>
-</header>
+    <nav class="site-nav" aria-label="Navegação principal">
+      <a href="#psicoterapia">Psicoterapia</a>
+      <a href="#como-trabalhamos">Como trabalhamos</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
 
-<main>
-<section id="hero" class="section hero">
+  <main>
 
-  <div class="hero-content">
+    <section id="hero" class="section hero">
+      <div class="hero-content">
 
-    <div class="hero-text">
-      <p class="eyebrow">Escuta em Movimento</p>
+        <div class="hero-text">
+          <p class="eyebrow">Escuta em Movimento</p>
 
-      <h1>Espaço Aruã</h1>
+          <h1>Espaço Aruã</h1>
+
+          <p>
+            Texto provisório de apresentação da landing page.
+          </p>
+
+          <a href="#contato" class="button">
+            Agendar atendimento
+          </a>
+        </div>
+
+        <div class="hero-image">
+          <img
+            src="assets/hero2.jpg"
+            alt="Consultório do Espaço Aruã">
+        </div>
+
+      </div>
+    </section>
+
+    <section id="psicoterapia" class="section">
+      <h2>Psicoterapia</h2>
 
       <p>
-        Texto provisório de apresentação da landing page.
+        Texto provisório sobre o principal atendimento oferecido
+        pelo Espaço Aruã.
+      </p>
+    </section>
+
+    <section id="como-trabalhamos" class="section">
+      <h2>Como trabalhamos</h2>
+
+      <article>
+        <h3>Avaliação Psicológica</h3>
+        <p>Texto provisório.</p>
+      </article>
+
+      <article>
+        <h3>Supervisão Clínica</h3>
+        <p>Texto provisório.</p>
+      </article>
+
+      <article>
+        <h3>Análise Institucional</h3>
+        <p>Texto provisório.</p>
+      </article>
+    </section>
+
+    <section id="equipe" class="section team-section">
+      <div class="section-heading">
+        <p class="eyebrow">Profissionais</p>
+        <h2>Nossa equipe</h2>
+
+        <p>
+          Conheça os profissionais que compõem o Espaço Aruã.
+        </p>
+      </div>
+
+      <div class="team-list">
+
+        <article class="team-member">
+          <img
+            src="assets/paola.jpg"
+            alt="Paola Lazzarotto"
+            class="team-photo">
+
+          <div class="team-content">
+            <h3>Paola Lazzarotto</h3>
+
+            <p class="team-crp">CRP 07/22344</p>
+
+            <p class="team-title">
+              Especialista em Saúde Mental
+            </p>
+
+            <p class="team-audience">
+              Atendimento a crianças, adolescentes, adultos e casais.
+            </p>
+
+            <p class="team-summary">
+              Texto provisório de apresentação da trajetória e da forma
+              de trabalho da profissional.
+            </p>
+
+            <div class="team-more" id="paola-more" hidden>
+              <p>
+                Texto provisório para a trajetória profissional completa,
+                formação, experiências e áreas de atuação.
+              </p>
+            </div>
+
+            <button
+              class="more-link"
+              type="button"
+              aria-expanded="false"
+              aria-controls="paola-more">
+              Saiba mais
+              <span aria-hidden="true">↓</span>
+            </button>
+
+            <a
+              href="#"
+              class="button team-button"
+              aria-label="Agendar atendimento com Paola">
+              Agendar com a Paola
+            </a>
+          </div>
+        </article>
+
+        <article class="team-member">
+          <img
+            src="assets/cassio.jpg"
+            alt="Cássio Mattiello Alves"
+            class="team-photo">
+
+          <div class="team-content">
+            <h3>Cássio Mattiello Alves</h3>
+
+            <p class="team-crp">CRP 07/37779</p>
+
+            <p class="team-title">
+              Mestre em Psicologia Social
+            </p>
+
+            <p class="team-audience">
+              Atendimento a adolescentes, adultos e idosos.
+            </p>
+
+            <p class="team-summary">
+              Texto provisório de apresentação da trajetória e da forma
+              de trabalho do profissional.
+            </p>
+
+            <div class="team-more" id="cassio-more" hidden>
+              <p>
+                Texto provisório para a trajetória profissional completa,
+                formação, experiências e áreas de atuação.
+              </p>
+            </div>
+
+            <button
+              class="more-link"
+              type="button"
+              aria-expanded="false"
+              aria-controls="cassio-more">
+              Saiba mais
+              <span aria-hidden="true">↓</span>
+            </button>
+
+            <a
+              href="#"
+              class="button team-button"
+              aria-label="Agendar atendimento com Cássio">
+              Agendar com o Cássio
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="contato" class="section">
+      <h2>Contato</h2>
+
+      <p>
+        WhatsApp, Instagram, endereço e mapa entram aqui.
       </p>
 
-      <a href="#contato" class="button">
-        Agendar atendimento
+      <a href="#" class="button">
+        Chamar no WhatsApp
       </a>
-    </div>
+    </section>
 
-    <div class="hero-image">
-      <img
-        src="assets/hero2.jpg"
-        alt="Consultório do Espaço Aruã">
-    </div>
+  </main>
 
-  </div>
-
-</section>
-
-  <section id="psicoterapia" class="section">
-    <h2>Psicoterapia</h2>
-    <p>Texto provisório sobre o principal atendimento oferecido pelo Espaço Aruã.</p>
-  </section>
-
-  <section id="como-trabalhamos" class="section">
-    <h2>Como trabalhamos</h2>
-
-    <article>
-      <h3>Avaliação Psicológica</h3>
-      <p>Texto provisório.</p>
-    </article>
-
-    <article>
-      <h3>Supervisão Clínica</h3>
-      <p>Texto provisório.</p>
-    </article>
-
-    <article>
-      <h3>Análise Institucional</h3>
-      <p>Texto provisório.</p>
-    </article>
-  </section>
-
-  <section id="equipe" class="section">
-    <h2>Nossa equipe</h2>
-
-    <article>
-      <h3>Paola Lazzarotto</h3>
-      <p>CRP 07/22344</p>
-    </article>
-
-    <article>
-      <h3>Cássio Mattiello Alves</h3>
-      <p>CRP 07/37779</p>
-    </article>
-  </section>
-
-  <section id="contato" class="section">
-    <h2>Contato</h2>
-    <p>WhatsApp, Instagram, endereço e mapa entram aqui.</p>
-    <a href="#" class="button">Chamar no WhatsApp</a>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <p>Espaço Aruã — São Leopoldo/RS</p>
-</footer>
+  <footer class="site-footer">
+    <p>Espaço Aruã — São Leopoldo/RS</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
