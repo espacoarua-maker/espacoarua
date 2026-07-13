@@ -41,6 +41,10 @@ h2 {
   line-height: 1.1;
 }
 
+address {
+  font-style: normal;
+}
+
 /* Header */
 
 .site-header {
@@ -150,7 +154,7 @@ h2 {
   border-radius: 12px;
 }
 
-/* Botões */
+/* Botões e links */
 
 .button {
   display: inline-flex;
@@ -174,21 +178,29 @@ h2 {
   opacity: 0.95;
 }
 
-/* Cards gerais */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cor-destaque);
+  text-decoration: none;
+  font-weight: 600;
+}
 
-article {
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* Serviços */
+
+.services-list article {
   margin-top: 24px;
   padding: 24px;
   background: rgba(255, 255, 255, 0.45);
   border-radius: 18px;
 }
 
-/* Equipe */
-
-.team-section {
-  padding-top: 88px;
-  padding-bottom: 88px;
-}
+/* Cabeçalhos de seção */
 
 .section-heading {
   max-width: 650px;
@@ -205,6 +217,13 @@ article {
   font-size: 1.05rem;
 }
 
+/* Equipe */
+
+.team-section {
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
 .team-list {
   max-width: 900px;
   margin: 0 auto;
@@ -217,7 +236,6 @@ article {
   margin: 0;
   padding: 56px 0;
   background: transparent;
-  border-radius: 0;
 }
 
 .team-member + .team-member {
@@ -246,27 +264,23 @@ article {
   margin: 0;
   font-size: clamp(2rem, 5vw, 2.6rem);
   line-height: 1.1;
-  text-align: left;
 }
 
 .team-crp {
   margin: 8px 0 0;
   color: rgba(47, 42, 37, 0.72);
   font-size: 0.92rem;
-  text-align: left;
 }
 
 .team-title {
   margin: 18px 0 0;
   font-weight: 600;
-  text-align: left;
 }
 
 .team-audience {
   max-width: 470px;
   margin: 6px 0 26px;
   color: rgba(47, 42, 37, 0.82);
-  text-align: left;
 }
 
 .team-summary,
@@ -297,11 +311,11 @@ article {
   text-decoration: underline;
 }
 
-.more-link span {
+.more-arrow {
   transition: transform 0.2s ease;
 }
 
-.more-link[aria-expanded="true"] span {
+.more-link[aria-expanded="true"] .more-arrow {
   transform: rotate(180deg);
 }
 
@@ -309,12 +323,109 @@ article {
   margin-top: 26px;
 }
 
+/* Onde estamos e contato */
+
+.contact-section {
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
+.contact-heading {
+  margin-bottom: 56px;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.contact-information {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.contact-group {
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(47, 42, 37, 0.12);
+}
+
+.contact-group:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.contact-group h3,
+.partner-space h3 {
+  margin: 0 0 10px;
+  font-size: 1.65rem;
+  line-height: 1.2;
+}
+
+.contact-group p {
+  margin: 0;
+}
+
+.contact-group .button {
+  margin-top: 20px;
+}
+
+.contact-group address {
+  color: rgba(47, 42, 37, 0.88);
+}
+
+.practical-information {
+  margin-top: 8px !important;
+  color: rgba(47, 42, 37, 0.78);
+}
+
+.waiting-room-photo {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.partner-space-text {
+  padding-top: 24px;
+}
+
+.partner-space-text p {
+  margin: 0 0 18px;
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.map-container {
+  margin-top: 64px;
+}
+
+.map-placeholder {
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  border: 1px solid rgba(47, 42, 37, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.35);
+  color: rgba(47, 42, 37, 0.65);
+  text-align: center;
+}
+
 /* Rodapé */
 
 .site-footer {
-  padding: 32px 24px;
+  padding: 36px 24px;
+  border-top: 1px solid rgba(47, 42, 37, 0.12);
   text-align: center;
   font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 4px 0;
 }
 
 /* Responsividade */
@@ -352,7 +463,8 @@ article {
     font-size: clamp(2.7rem, 15vw, 4rem);
   }
 
-  .team-section {
+  .team-section,
+  .contact-section {
     padding-top: 64px;
     padding-bottom: 64px;
   }
@@ -396,5 +508,26 @@ article {
 
   .team-button {
     width: 100%;
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .contact-information {
+    gap: 28px;
+  }
+
+  .waiting-room-photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .map-container {
+    margin-top: 48px;
+  }
+
+  .map-placeholder {
+    min-height: 280px;
   }
 }
