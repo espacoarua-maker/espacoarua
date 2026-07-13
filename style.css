@@ -8,6 +8,10 @@
   --largura-conteudo: 1100px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -20,16 +24,33 @@ body {
   line-height: 1.6;
 }
 
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: clamp(2.3rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--cor-fundo);
-  padding: 14px 24px;
   display: flex;
   justify-content: space-between;
-  gap: 24px;
   align-items: center;
+  gap: 24px;
+  padding: 14px 24px;
+  background: var(--cor-fundo);
   border-bottom: 1px solid rgba(47, 42, 37, 0.12);
 }
 
@@ -45,14 +66,14 @@ body {
 }
 
 .logo-link img {
-  height: 38px;
   width: auto;
+  height: 38px;
 }
 
 .site-nav {
   display: flex;
-  gap: 18px;
   flex-wrap: wrap;
+  gap: 18px;
 }
 
 .site-nav a {
@@ -61,17 +82,14 @@ body {
   font-size: 0.95rem;
 }
 
+.site-nav a:hover {
+  color: var(--cor-destaque);
+}
+
 .section {
   max-width: var(--largura-conteudo);
   margin: 0 auto;
   padding: 72px 24px;
-}
-
-h1,
-h2,
-h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
 }
 
 .hero {
@@ -92,16 +110,16 @@ h3 {
 }
 
 .hero h1 {
+  margin: 0.25rem 0 1.5rem;
   font-size: clamp(3rem, 6vw, 4.5rem);
   line-height: 1;
-  margin: 0.25rem 0 1.5rem;
 }
 
 .eyebrow {
+  margin: 0;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 0.85rem;
-  margin: 0;
 }
 
 .hero-text p {
@@ -121,23 +139,26 @@ h3 {
 .hero-image img {
   width: 100%;
   display: block;
-  border-radius: 12px;
   object-fit: cover;
   aspect-ratio: 4 / 3;
+  border-radius: 12px;
 }
 
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: auto;
   margin-top: 24px;
-  padding: 16px 34px;
+  padding: 15px 30px;
   border-radius: 999px;
   background: var(--cor-destaque);
   color: var(--cor-branco);
   text-decoration: none;
   font-weight: 600;
-  transition: 0.25s;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .button:hover {
@@ -152,20 +173,150 @@ article {
   border-radius: 18px;
 }
 
+/* Equipe */
+
+.team-section {
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
+.section-heading {
+  max-width: 650px;
+  margin: 0 auto 64px;
+  text-align: center;
+}
+
+.section-heading h2 {
+  margin-top: 8px;
+}
+
+.section-heading > p:last-child {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+}
+
+.team-list {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.team-member {
+  margin: 0;
+  padding: 56px 0;
+  background: transparent;
+  border-radius: 0;
+  text-align: center;
+}
+
+.team-member + .team-member {
+  border-top: 1px solid rgba(47, 42, 37, 0.14);
+}
+
+.team-photo {
+  width: 158px;
+  height: 158px;
+  display: block;
+  margin: 0 auto 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.team-content {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.team-content h3 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.team-crp {
+  margin: 8px 0 0;
+  color: rgba(47, 42, 37, 0.72);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.team-title {
+  margin: 18px 0 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.team-audience {
+  margin: 6px auto 26px;
+  max-width: 470px;
+  color: rgba(47, 42, 37, 0.82);
+  text-align: center;
+}
+
+.team-summary,
+.team-more {
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.team-more[hidden] {
+  display: none;
+}
+
+.more-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cor-destaque);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.more-link:hover {
+  text-decoration: underline;
+}
+
+.more-link span {
+  transition: transform 0.2s ease;
+}
+
+.more-link[aria-expanded="true"] span {
+  transform: rotate(180deg);
+}
+
+.team-button {
+  margin-top: 26px;
+}
+
+/* Rodapé */
+
 .site-footer {
   padding: 32px 24px;
   text-align: center;
   font-size: 0.9rem;
 }
 
+/* Responsividade */
+
 @media (max-width: 768px) {
   .site-header {
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
   }
 
   .site-nav {
     gap: 12px;
+  }
+
+  .section {
+    padding: 56px 20px;
   }
 
   .hero {
@@ -185,5 +336,31 @@ article {
 
   .hero h1 {
     font-size: clamp(2.7rem, 15vw, 4rem);
+  }
+
+  .team-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .section-heading {
+    margin-bottom: 32px;
+  }
+
+  .team-member {
+    padding: 44px 0;
+  }
+
+  .team-photo {
+    width: 126px;
+    height: 126px;
+  }
+
+  .team-content h3 {
+    font-size: 2.2rem;
+  }
+
+  .team-button {
+    width: 100%;
   }
 }
