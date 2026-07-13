@@ -36,10 +36,12 @@ h3 {
 }
 
 h2 {
+  margin: 0 0 24px;
   font-size: clamp(2.3rem, 5vw, 3.5rem);
   line-height: 1.1;
-  margin: 0 0 24px;
 }
+
+/* Header */
 
 .site-header {
   position: sticky;
@@ -86,11 +88,22 @@ h2 {
   color: var(--cor-destaque);
 }
 
+/* Estrutura geral */
+
 .section {
   max-width: var(--largura-conteudo);
   margin: 0 auto;
   padding: 72px 24px;
 }
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Hero */
 
 .hero {
   min-height: 72vh;
@@ -115,13 +128,6 @@ h2 {
   line-height: 1;
 }
 
-.eyebrow {
-  margin: 0;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
 .hero-text p {
   max-width: 560px;
 }
@@ -144,6 +150,8 @@ h2 {
   border-radius: 12px;
 }
 
+/* Botões */
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -165,6 +173,8 @@ h2 {
   transform: translateY(-2px);
   opacity: 0.95;
 }
+
+/* Cards gerais */
 
 article {
   margin-top: 24px;
@@ -196,16 +206,18 @@ article {
 }
 
 .team-list {
-  max-width: 760px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .team-member {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
   margin: 0;
   padding: 56px 0;
   background: transparent;
   border-radius: 0;
-  text-align: center;
 }
 
 .team-member + .team-member {
@@ -213,18 +225,20 @@ article {
 }
 
 .team-photo {
+  flex: 0 0 158px;
   width: 158px;
   height: 158px;
   display: block;
-  margin: 0 auto 26px;
+  margin: 0;
   border-radius: 50%;
   object-fit: cover;
   object-position: center 25%;
 }
 
 .team-content {
-  max-width: 620px;
-  margin: 0 auto;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
   text-align: left;
 }
 
@@ -232,27 +246,27 @@ article {
   margin: 0;
   font-size: clamp(2rem, 5vw, 2.6rem);
   line-height: 1.1;
-  text-align: center;
+  text-align: left;
 }
 
 .team-crp {
   margin: 8px 0 0;
   color: rgba(47, 42, 37, 0.72);
   font-size: 0.92rem;
-  text-align: center;
+  text-align: left;
 }
 
 .team-title {
   margin: 18px 0 0;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
 }
 
 .team-audience {
-  margin: 6px auto 26px;
   max-width: 470px;
+  margin: 6px 0 26px;
   color: rgba(47, 42, 37, 0.82);
-  text-align: center;
+  text-align: left;
 }
 
 .team-summary,
@@ -348,16 +362,36 @@ article {
   }
 
   .team-member {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
     padding: 44px 0;
   }
 
   .team-photo {
+    flex: none;
     width: 126px;
     height: 126px;
+    margin: 0 auto 26px;
+  }
+
+  .team-content {
+    width: 100%;
   }
 
   .team-content h3 {
     font-size: 2.2rem;
+  }
+
+  .team-content h3,
+  .team-crp,
+  .team-title,
+  .team-audience {
+    text-align: center;
+  }
+
+  .team-audience {
+    margin: 6px auto 26px;
   }
 
   .team-button {
