@@ -2,7 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
   <title>Espaço Aruã | Escuta em Movimento</title>
 
@@ -17,7 +20,10 @@
 
   <header class="site-header">
     <a href="#hero" class="logo-link">
-      <img src="assets/logo.svg" alt="Logotipo do Espaço Aruã">
+      <img
+        src="assets/logo.svg"
+        alt="Logotipo do Espaço Aruã">
+
       <span>Espaço Aruã</span>
     </a>
 
@@ -69,25 +75,30 @@
     <section id="como-trabalhamos" class="section">
       <h2>Como trabalhamos</h2>
 
-      <article>
-        <h3>Avaliação Psicológica</h3>
-        <p>Texto provisório.</p>
-      </article>
+      <div class="services-list">
 
-      <article>
-        <h3>Supervisão Clínica</h3>
-        <p>Texto provisório.</p>
-      </article>
+        <article class="service-card">
+          <h3>Avaliação Psicológica</h3>
+          <p>Texto provisório.</p>
+        </article>
 
-      <article>
-        <h3>Análise Institucional</h3>
-        <p>Texto provisório.</p>
-      </article>
+        <article class="service-card">
+          <h3>Supervisão Clínica</h3>
+          <p>Texto provisório.</p>
+        </article>
+
+        <article class="service-card">
+          <h3>Análise Institucional</h3>
+          <p>Texto provisório.</p>
+        </article>
+
+      </div>
     </section>
 
     <section id="equipe" class="section team-section">
       <div class="section-heading">
         <p class="eyebrow">Profissionais</p>
+
         <h2>Nossa equipe</h2>
 
         <p>
@@ -109,7 +120,7 @@
             <p class="team-crp">CRP 07/22344</p>
 
             <p class="team-title">
-              Mestre em Saúde Coletiva
+              Especialista em Saúde Mental
             </p>
 
             <p class="team-audience">
@@ -133,14 +144,16 @@
               type="button"
               aria-expanded="false"
               aria-controls="paola-more">
-              Saiba mais
-              <span aria-hidden="true">↓</span>
+
+              <span class="more-label">Saiba mais</span>
+              <span class="more-arrow" aria-hidden="true">↓</span>
             </button>
 
             <a
               href="#"
               class="button team-button"
               aria-label="Agendar atendimento com Paola">
+
               Agendar com a Paola
             </a>
           </div>
@@ -148,7 +161,7 @@
 
         <article class="team-member">
           <img
-            src="assets/cassio.jpg"
+            src="assets/cassio.jpeg"
             alt="Cássio Mattiello Alves"
             class="team-photo">
 
@@ -182,14 +195,16 @@
               type="button"
               aria-expanded="false"
               aria-controls="cassio-more">
-              Saiba mais
-              <span aria-hidden="true">↓</span>
+
+              <span class="more-label">Saiba mais</span>
+              <span class="more-arrow" aria-hidden="true">↓</span>
             </button>
 
             <a
               href="#"
               class="button team-button"
               aria-label="Agendar atendimento com Cássio">
+
               Agendar com o Cássio
             </a>
           </div>
@@ -198,22 +213,118 @@
       </div>
     </section>
 
-    <section id="contato" class="section">
-      <h2>Contato</h2>
+    <section id="contato" class="section contact-section">
+      <div class="section-heading contact-heading">
+        <p class="eyebrow">Contato e localização</p>
+        <h2>Onde estamos</h2>
 
-      <p>
-        WhatsApp, Instagram, endereço e mapa entram aqui.
-      </p>
+        <p>
+          Informações para entrar em contato e chegar ao Espaço Aruã.
+        </p>
+      </div>
 
-      <a href="#" class="button">
-        Chamar no WhatsApp
-      </a>
+      <div class="contact-layout">
+
+        <div class="contact-information">
+
+          <div class="contact-group">
+            <h3>Agende seu atendimento</h3>
+
+            <p>
+              Entre em contato para conversar sobre os atendimentos
+              oferecidos pelo Espaço Aruã.
+            </p>
+
+            <!-- Substituir pelo link definitivo do WhatsApp -->
+            <a href="#" class="button">
+              Agendar atendimento
+            </a>
+          </div>
+
+          <div class="contact-group">
+            <h3>Acompanhe o Espaço Aruã</h3>
+
+            <!-- Substituir pelo perfil definitivo do Instagram -->
+            <a
+              href="#"
+              class="text-link"
+              target="_blank"
+              rel="noopener noreferrer">
+
+              @espacoarua
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="contact-group">
+            <h3>Localização</h3>
+
+            <!-- Substituir pelo endereço completo -->
+            <address>
+              Endereço completo do Espaço Aruã<br>
+              São Leopoldo — RS
+            </address>
+
+            <p class="practical-information">
+              Ambiente com acessibilidade.
+            </p>
+          </div>
+
+          <div class="contact-group">
+            <h3>Pagamento</h3>
+
+            <p class="practical-information">
+              Pix, cartão de débito e cartão de crédito.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="partner-space">
+          <img
+            src="assets/sala-espera.jpg"
+            alt="Sala de espera do Bruna Rossi Espaço de Saúde"
+            class="waiting-room-photo">
+
+          <div class="partner-space-text">
+            <h3>Um ambiente compartilhado de cuidado</h3>
+
+            <p>
+              O Espaço Aruã está localizado no Bruna Rossi Espaço de
+              Saúde, um ambiente compartilhado por profissionais da área
+              da saúde, planejado para oferecer conforto, acessibilidade
+              e acolhimento. Acreditamos que um espaço tranquilo e bem
+              cuidado também contribui para a experiência de quem nos
+              procura.
+            </p>
+
+            <a
+              href="https://www.instagram.com/brunarossiespacodesaude"
+              class="text-link"
+              target="_blank"
+              rel="noopener noreferrer">
+
+              Conheça o Bruna Rossi Espaço de Saúde
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="map-container">
+        <!-- Substituir pelo iframe de incorporação do Google Maps -->
+        <div class="map-placeholder">
+          <p>O mapa será inserido aqui.</p>
+        </div>
+      </div>
     </section>
 
   </main>
 
   <footer class="site-footer">
     <p>Espaço Aruã — São Leopoldo/RS</p>
+    <p>aruaespaco.com.br</p>
   </footer>
 
   <script src="script.js"></script>
