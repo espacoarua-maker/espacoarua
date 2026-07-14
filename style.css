@@ -136,10 +136,22 @@ address {
   max-width: 560px;
 }
 
+.hero-text .eyebrow {
+  margin: 0;
+}
+
+.hero-text .eyebrow + h1 + p {
+  margin: 0 0 1rem;
+  font-size: 1.18rem;
+  line-height: 1.7;
+  color: rgba(47, 42, 37, 0.92);
+}
+
 .hero-text p:last-of-type {
-  font-size: 1.15rem;
-  line-height: 1.8;
-  color: rgba(47, 42, 37, 0.85);
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(47, 42, 37, 0.76);
 }
 
 .hero-image {
