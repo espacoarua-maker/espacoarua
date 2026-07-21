@@ -59,6 +59,12 @@ if (gallery) {
 }
 
 
+const initialPagePosition = {
+  x: window.scrollX,
+  y: window.scrollY,
+  hasHash: Boolean(window.location.hash)
+};
+
 function loadAruaTrackingScript(source) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
@@ -86,6 +92,29 @@ function restoreReferenceWhatsAppButtons() {
       index === 0
         ? 'whatsapp_cassio_hero'
         : 'whatsapp_cassio_contact';
+  });
+}
+
+function restoreInitialViewport() {
+  const activeElement = document.activeElement;
+
+  if (
+    activeElement &&
+    activeElement.matches('[data-cookie-accept], [data-cookie-reject]')
+  ) {
+    activeElement.blur();
+  }
+
+  if (initialPagePosition.hasHash) {
+    return;
+  }
+
+  window.requestAnimationFrame(() => {
+    window.scrollTo({
+      left: initialPagePosition.x,
+      top: initialPagePosition.y,
+      behavior: 'auto'
+    });
   });
 }
 
@@ -161,6 +190,7 @@ loadAruaTrackingScript('tracking-config.js')
   .then(() => loadAruaTrackingScript('tracking.js'))
   .then(() => {
     restoreReferenceWhatsAppButtons();
+    restoreInitialViewport();
     bindReliableWhatsAppLeadTracking();
   })
   .catch(() => {
