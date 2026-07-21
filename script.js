@@ -89,9 +89,80 @@ function restoreReferenceWhatsAppButtons() {
   });
 }
 
+function getStoredAnalyticsConsent() {
+  const config = window.ARUA_TRACKING_CONFIG || {};
+  const storageKey =
+    config.consentStorageKey || 'arua-analytics-consent-v1';
+
+  try {
+    return localStorage.getItem(storageKey);
+  } catch (error) {
+    return null;
+  }
+}
+
+function getWhatsAppEventContext(eventName) {
+  const professional = eventName.includes('paola') ? 'paola' : 'cassio';
+
+  let placement = 'team';
+  if (eventName.includes('hero')) {
+    placement = 'hero';
+  } else if (eventName.includes('contact')) {
+    placement = 'contact';
+  }
+
+  return { professional, placement };
+}
+
+function bindReliableWhatsAppLeadTracking() {
+  if (window.__ARUA_WHATSAPP_LEAD_TRACKING__) {
+    return;
+  }
+  window.__ARUA_WHATSAPP_LEAD_TRACKING__ = true;
+
+  document.addEventListener(
+    'click',
+    (event) => {
+      const link = event.target.closest(
+        'a[href*="wa.me/"][data-track-event]'
+      );
+
+      if (!link || getStoredAnalyticsConsent() !== 'granted') {
+        return;
+      }
+
+      const config = window.ARUA_TRACKING_CONFIG || {};
+      if (!config.ga4MeasurementId || typeof window.gtag !== 'function') {
+        return;
+      }
+
+      const originalEventName = link.dataset.trackEvent || 'whatsapp_click';
+      const context = getWhatsAppEventContext(originalEventName);
+
+      window.gtag('event', 'generate_lead', {
+        send_to: config.ga4MeasurementId,
+        lead_source: 'whatsapp',
+        contact_method: 'whatsapp',
+        professional: context.professional,
+        placement: context.placement,
+        original_event_name: originalEventName,
+        link_url: link.href,
+        link_text: link.textContent.trim(),
+        page_location: window.location.href,
+        transport_type: 'beacon',
+        event_timeout: 1000
+      });
+    },
+    true
+  );
+}
+
 loadAruaTrackingScript('tracking-config.js')
   .then(() => loadAruaTrackingScript('tracking.js'))
-  .then(restoreReferenceWhatsAppButtons)
+  .then(() => {
+    restoreReferenceWhatsAppButtons();
+    bindReliableWhatsAppLeadTracking();
+  })
   .catch(() => {
     // Falhas de mensuração não impedem o funcionamento do site.
   });
