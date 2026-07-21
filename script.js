@@ -69,8 +69,29 @@ function loadAruaTrackingScript(source) {
   });
 }
 
+function restoreReferenceWhatsAppButtons() {
+  const referenceWhatsAppUrl =
+    'https://wa.me/5551982914845?text=Olá!%20Conheci%20o%20Espaço%20Aruã%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20atendimento.';
+
+  const genericButtons = Array.from(
+    document.querySelectorAll('a.button')
+  ).filter((link) => !link.classList.contains('team-button'));
+
+  genericButtons.forEach((link, index) => {
+    link.href = referenceWhatsAppUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'Agendar atendimento';
+    link.dataset.trackEvent =
+      index === 0
+        ? 'whatsapp_cassio_hero'
+        : 'whatsapp_cassio_contact';
+  });
+}
+
 loadAruaTrackingScript('tracking-config.js')
   .then(() => loadAruaTrackingScript('tracking.js'))
+  .then(restoreReferenceWhatsAppButtons)
   .catch(() => {
     // Falhas de mensuração não impedem o funcionamento do site.
   });
