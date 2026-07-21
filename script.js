@@ -57,3 +57,20 @@ if (gallery) {
     });
   });
 }
+
+
+function loadAruaTrackingScript(source) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = source;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+loadAruaTrackingScript('tracking-config.js')
+  .then(() => loadAruaTrackingScript('tracking.js'))
+  .catch(() => {
+    // Falhas de mensuração não impedem o funcionamento do site.
+  });
