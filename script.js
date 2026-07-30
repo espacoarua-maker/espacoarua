@@ -88,10 +88,15 @@ function restoreReferenceWhatsAppButtons() {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.textContent = 'Agendar atendimento';
-    link.dataset.trackEvent =
-      index === 0
-        ? 'whatsapp_cassio_hero'
-        : 'whatsapp_cassio_contact';
+    link.dataset.leadProfessional = 'cassio';
+    link.dataset.leadPlacement = index === 0 ? 'hero' : 'contact';
+    link.dataset.leadServiceMode = 'general';
+  });
+
+  document.querySelectorAll('a[href*="wa.me/"]').forEach((link) => {
+    // O rastreio de WhatsApp é centralizado neste arquivo para evitar
+    // disparos duplicados pelos listeners genéricos de tracking.js.
+    link.removeAttribute('data-track-event');
   });
 }
 
@@ -130,17 +135,90 @@ function getStoredAnalyticsConsent() {
   }
 }
 
-function getWhatsAppEventContext(eventName) {
-  const professional = eventName.includes('paola') ? 'paola' : 'cassio';
-
-  let placement = 'team';
-  if (eventName.includes('hero')) {
-    placement = 'hero';
-  } else if (eventName.includes('contact')) {
-    placement = 'contact';
+function isAnalyticsMeasurementActive() {
+  if (getStoredAnalyticsConsent() === 'granted') {
+    return true;
   }
 
-  return { professional, placement };
+  // Mantém o rastreio funcional quando o navegador aceita o consentimento,
+  // mas bloqueia a leitura do localStorage. A tag só existe após a aceitação.
+  return Boolean(
+    document.querySelector('script[data-arua-source="google-tag"]')
+  );
+}
+
+function getWhatsAppEventContext(link) {
+  const href = link.href || '';
+  const professional =
+    link.dataset.leadProfessional ||
+    (href.includes('5551999590970') ? 'paola' : 'cassio');
+
+  let placement = link.dataset.leadPlacement || 'team';
+  if (!link.dataset.leadPlacement) {
+    const section = link.closest('section[id]');
+    if (section?.id === 'hero') {
+      placement = 'hero';
+    } else if (section?.id === 'contato') {
+      placement = 'contact';
+    }
+  }
+
+  const serviceMode = link.dataset.leadServiceMode || 'general';
+  let eventName = 'whatsapp_click';
+
+  if (professional === 'paola') {
+    eventName = 'whatsapp_paola';
+  } else if (placement === 'hero') {
+    eventName = 'whatsapp_cassio_hero';
+  } else if (placement === 'contact') {
+    eventName = 'whatsapp_cassio_contact';
+  } else {
+    eventName = 'whatsapp_cassio';
+  }
+
+  return { professional, placement, serviceMode, eventName };
+}
+
+function openWhatsAppAfterTracking(link, callback) {
+  const destination = link.href;
+  const openInNewTab = link.target === '_blank';
+  let destinationWindow = null;
+
+  if (openInNewTab) {
+    try {
+      destinationWindow = window.open('about:blank', '_blank');
+      if (destinationWindow) {
+        destinationWindow.opener = null;
+        destinationWindow.document.title = 'Abrindo WhatsApp…';
+        destinationWindow.document.body.textContent = 'Abrindo WhatsApp…';
+      }
+    } catch (error) {
+      destinationWindow = null;
+    }
+  }
+
+  let completed = false;
+  let fallbackTimer = null;
+
+  const navigate = () => {
+    if (completed) {
+      return;
+    }
+    completed = true;
+
+    if (fallbackTimer) {
+      window.clearTimeout(fallbackTimer);
+    }
+
+    if (destinationWindow && !destinationWindow.closed) {
+      destinationWindow.location.replace(destination);
+    } else {
+      window.location.assign(destination);
+    }
+  };
+
+  fallbackTimer = window.setTimeout(navigate, 1200);
+  callback(navigate);
 }
 
 function bindReliableWhatsAppLeadTracking() {
@@ -149,37 +227,59 @@ function bindReliableWhatsAppLeadTracking() {
   }
   window.__ARUA_WHATSAPP_LEAD_TRACKING__ = true;
 
+  let lastClickHref = '';
+  let lastClickTime = 0;
+
   document.addEventListener(
     'click',
     (event) => {
-      const link = event.target.closest(
-        'a[href*="wa.me/"][data-track-event]'
-      );
+      const target = event.target instanceof Element ? event.target : null;
+      const link = target?.closest('a[href*="wa.me/"]');
 
-      if (!link || getStoredAnalyticsConsent() !== 'granted') {
+      if (!link) {
         return;
       }
+
+      if (
+        !isAnalyticsMeasurementActive() ||
+        typeof window.gtag !== 'function'
+      ) {
+        return;
+      }
+
+      const now = Date.now();
+      if (link.href === lastClickHref && now - lastClickTime < 1500) {
+        event.preventDefault();
+        return;
+      }
+      lastClickHref = link.href;
+      lastClickTime = now;
+
+      event.preventDefault();
 
       const config = window.ARUA_TRACKING_CONFIG || {};
-      if (!config.ga4MeasurementId || typeof window.gtag !== 'function') {
-        return;
-      }
-
-      const originalEventName = link.dataset.trackEvent || 'whatsapp_click';
-      const context = getWhatsAppEventContext(originalEventName);
-
-      window.gtag('event', 'generate_lead', {
+      const context = getWhatsAppEventContext(link);
+      const commonParameters = {
         send_to: config.ga4MeasurementId,
         lead_source: 'whatsapp',
         contact_method: 'whatsapp',
         professional: context.professional,
         placement: context.placement,
-        original_event_name: originalEventName,
+        service_mode: context.serviceMode,
         link_url: link.href,
         link_text: link.textContent.trim(),
         page_location: window.location.href,
-        transport_type: 'beacon',
-        event_timeout: 1000
+        transport_type: 'beacon'
+      };
+
+      openWhatsAppAfterTracking(link, (navigate) => {
+        window.gtag('event', context.eventName, commonParameters);
+        window.gtag('event', 'generate_lead', {
+          ...commonParameters,
+          original_event_name: context.eventName,
+          event_callback: navigate,
+          event_timeout: 1000
+        });
       });
     },
     true
