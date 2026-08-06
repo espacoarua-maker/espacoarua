@@ -273,6 +273,10 @@ function bindReliableWhatsAppLeadTracking() {
       };
 
       openWhatsAppAfterTracking(link, (navigate) => {
+        window.gtag('event', 'conversion_event_contact_1', {
+          event_callback: navigate,
+          event_timeout: 2000
+        });
         window.gtag('event', context.eventName, commonParameters);
         window.gtag('event', 'generate_lead', {
           ...commonParameters,
