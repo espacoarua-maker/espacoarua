@@ -13,6 +13,72 @@
     name="description"
     content="Espaço Aruã — atendimento psicológico presencial e online em São Leopoldo/RS.">
 
+  <script src="tracking-config.js"></script>
+  <script>
+    (() => {
+      const config = window.ARUA_TRACKING_CONFIG || {};
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function gtag() {
+        window.dataLayer.push(arguments);
+      };
+
+      window.gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+      });
+      window.__ARUA_CONSENT_DEFAULT_SET__ = true;
+
+      function loadGoogleScript(src, marker) {
+        if (document.querySelector(`script[data-arua-source="${marker}"]`)) {
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = src;
+        script.dataset.aruaSource = marker;
+        document.head.appendChild(script);
+      }
+
+      if (config.ga4MeasurementId) {
+        loadGoogleScript(
+          `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+            config.ga4MeasurementId
+          )}`,
+          'google-tag'
+        );
+        window.gtag('js', new Date());
+        window.gtag('config', config.ga4MeasurementId, {
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false
+        });
+      }
+
+      if (config.googleAdsId && config.googleAdsId !== config.ga4MeasurementId) {
+        window.gtag('config', config.googleAdsId, {
+          allow_ad_personalization_signals: false
+        });
+      }
+
+      if (config.gtmContainerId) {
+        window.dataLayer.push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        loadGoogleScript(
+          `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(
+            config.gtmContainerId
+          )}`,
+          'google-tag-manager'
+        );
+      }
+    })();
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   
   <link rel="stylesheet" href="style.css">
