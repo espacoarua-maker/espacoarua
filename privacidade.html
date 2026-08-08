@@ -12,6 +12,72 @@
     name="description"
     content="Informações sobre privacidade e tecnologias utilizadas no site do Espaço Aruã.">
 
+  <script src="tracking-config.js"></script>
+  <script>
+    (() => {
+      const config = window.ARUA_TRACKING_CONFIG || {};
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function gtag() {
+        window.dataLayer.push(arguments);
+      };
+
+      window.gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+      });
+      window.__ARUA_CONSENT_DEFAULT_SET__ = true;
+
+      function loadGoogleScript(src, marker) {
+        if (document.querySelector(`script[data-arua-source="${marker}"]`)) {
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = src;
+        script.dataset.aruaSource = marker;
+        document.head.appendChild(script);
+      }
+
+      if (config.ga4MeasurementId) {
+        loadGoogleScript(
+          `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+            config.ga4MeasurementId
+          )}`,
+          'google-tag'
+        );
+        window.gtag('js', new Date());
+        window.gtag('config', config.ga4MeasurementId, {
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false
+        });
+      }
+
+      if (config.googleAdsId && config.googleAdsId !== config.ga4MeasurementId) {
+        window.gtag('config', config.googleAdsId, {
+          allow_ad_personalization_signals: false
+        });
+      }
+
+      if (config.gtmContainerId) {
+        window.dataLayer.push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        loadGoogleScript(
+          `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(
+            config.gtmContainerId
+          )}`,
+          'google-tag-manager'
+        );
+      }
+    })();
+  </script>
+
   <link rel="canonical" href="https://aruaespaco.com.br/privacidade.html">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="style.css">
@@ -64,11 +130,11 @@
     <h2>Dados técnicos e mensuração</h2>
 
     <p>
-      Após a autorização do visitante, o site pode utilizar Google Analytics e
-      Google Tag Manager para compreender acessos e registrar ações como
-      cliques nos botões de contato. Esses registros ajudam a avaliar o
-      funcionamento da página e das campanhas, sem substituir o contato direto
-      com os profissionais.
+      A Google tag e o Google Tag Manager podem ser carregados desde o início
+      da página com o Consent Mode configurado para negar, por padrão, o
+      armazenamento de dados de analytics e publicidade. A autorização do
+      visitante atualiza essa escolha e permite a mensuração opcional de
+      acessos e ações como cliques nos botões de contato.
     </p>
 
     <p>
@@ -109,7 +175,7 @@
     </p>
 
     <p class="privacy-updated">
-      Última atualização: 21 de julho de 2026.
+      Última atualização: 8 de agosto de 2026.
     </p>
   </main>
 
@@ -120,7 +186,6 @@
     <p>© 2026 Espaço Aruã</p>
   </footer>
 
-  <script src="tracking-config.js"></script>
   <script src="tracking.js"></script>
 </body>
 </html>
