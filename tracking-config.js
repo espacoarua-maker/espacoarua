@@ -1,9 +1,10 @@
 /*
  * Configuração de mensuração do Espaço Aruã.
  *
- * O Google Analytics é carregado diretamente pelo site somente depois do
- * consentimento. O contêiner do Google Tag Manager também é carregado após o
- * consentimento para receber eventos e permitir integrações futuras.
+ * A Google tag e o contêiner do Google Tag Manager são carregados no <head>
+ * desde o início da página. O Consent Mode começa com os armazenamentos de
+ * analytics e publicidade negados; o banner apenas atualiza esse consentimento
+ * quando a pessoa aceita ou recusa as tecnologias opcionais.
  *
  * Importante: enquanto o GA4 estiver sendo carregado diretamente aqui, não
  * publique no GTM uma segunda tag de visualização de página para o mesmo ID,
