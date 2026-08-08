@@ -18,15 +18,23 @@
     window.dataLayer.push(arguments);
   };
 
-  window.gtag('consent', 'default', {
-    analytics_storage: 'denied',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    wait_for_update: 500
-  });
+  if (!window.__ARUA_CONSENT_DEFAULT_SET__) {
+    window.gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+    window.__ARUA_CONSENT_DEFAULT_SET__ = true;
+  }
 
-  let measurementLoaded = false;
+  let measurementLoaded = Boolean(
+    document.querySelector(
+      'script[data-arua-source="google-tag"], ' +
+      'script[data-arua-source="google-tag-manager"]'
+    )
+  );
 
   function addStylesheet() {
     if (document.querySelector('link[href="tracking.css"]')) {
