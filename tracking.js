@@ -213,8 +213,10 @@
     banner.innerHTML = `
       <div class="cookie-banner-content">
         <p>
-          Utilizamos tecnologias opcionais para medir acessos e cliques nos
-          contatos. Você pode aceitar ou recusar sem impedir o uso do site.
+          Podemos usar métricas para entender como as pessoas encontram e
+          utilizam o site do Espaço Aruã. Isso nos ajuda a melhorar a página e
+          avaliar nossa divulgação. Você pode aceitar ou recusar; o site
+          funciona normalmente nos dois casos.
           <a href="privacidade.html">Saiba mais</a>.
         </p>
         <div class="cookie-banner-actions">
@@ -222,13 +224,13 @@
             class="cookie-button cookie-button-secondary"
             type="button"
             data-cookie-reject>
-            Recusar opcionais
+            Recusar
           </button>
           <button
             class="cookie-button cookie-button-primary"
             type="button"
             data-cookie-accept>
-            Aceitar
+            Aceitar métricas
           </button>
         </div>
       </div>`;
